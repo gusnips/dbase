@@ -1,0 +1,13 @@
+node_modules
+dist
+*.log
+.DS_Store
+.env
+.env.*
+.phpsessid
+coverage
+*.tsbuildinfo
+*.tgz
+.claude/worktrees
+# raw API answers saved while writing the types: they hold real people's data
+.responses
