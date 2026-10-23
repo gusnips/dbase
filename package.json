@@ -1,0 +1,71 @@
+{
+  "name": "dbase-sdk",
+  "packageManager": "bun@1.4.2",
+  "version": "0.1.0",
+  "description": "Unofficial TypeScript SDK for the DBase API: CPF, CNPJ, phone, CEP, name, e-mail and company prospecting lookups for Brazil",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "format": "prettier --write .",
+    "test": "bun test",
+    "prepublishOnly": "bun run lint && bun run typecheck && bun run build"
+  },
+  "keywords": [
+    "dbase",
+    "dbase-sdk",
+    "api-client",
+    "typescript",
+    "cpf",
+    "cnpj",
+    "cep",
+    "brazil",
+    "prospecting"
+  ],
+  "author": "Gustavo Salomé (gusnips)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gusnips/dbase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gusnips/dbase/issues"
+  },
+  "homepage": "https://github.com/gusnips/dbase#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.10",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.1"
+  }
+}
