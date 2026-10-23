@@ -1,0 +1,243 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.1.0",
+    "title": "DBase API Documentation",
+    "description": "API documentation for DBase system queries."
+  },
+  "host": "app.dbase.com.br",
+  "basePath": "/sistema/consultas",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/Data-basebrasil-api2024/": {
+      "post": {
+        "summary": "Consultas API",
+        "description": "API para consultas diversas. consulta=prospeccao lista empresas da base Receita Federal por cidade e filtros (exige o produto Prospecção de Empresas). Cobrança: 1 consulta por busca; paginar a mesma busca não cobra (janela de 60 min). Resposta: {status, total, total_mais, pagina, por_pagina, total_paginas, cobrado, empresas[]}.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "versao",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "enum": [
+              1,
+              2
+            ],
+            "description": "Versão da API (somente para consulta CNPJ)."
+          },
+          {
+            "name": "consulta",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Tipo de consulta. Valores permitidos: 'cpf', 'cnpj', 'telefone', 'cep', 'nome', 'email', 'prospeccao'.",
+            "enum": [
+              "cpf",
+              "cnpj",
+              "telefone",
+              "cep",
+              "nome",
+              "email",
+              "prospeccao"
+            ]
+          },
+          {
+            "name": "cpf",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "CPF"
+          },
+          {
+            "name": "cnpj",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "CNPJ"
+          },
+          {
+            "name": "cep",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "CEP (obrigatório quando consulta=cep)"
+          },
+          {
+            "name": "numero_inicial",
+            "in": "formData",
+            "required": false,
+            "type": "integer",
+            "description": "Número inicial do logradouro para filtrar resultados da consulta por CEP (opcional)"
+          },
+          {
+            "name": "numero_final",
+            "in": "formData",
+            "required": false,
+            "type": "integer",
+            "description": "Número final do logradouro para filtrar resultados da consulta por CEP (opcional)"
+          },
+          {
+            "name": "telefone",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Número de telefone"
+          },
+          {
+            "name": "nome",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Nome da pessoa"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Endereço de e-mail (obrigatório quando consulta=email). Retorna os documentos associados ao e-mail."
+          },
+          {
+            "name": "uf",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: UF (obrigatório quando consulta=prospeccao). Ex.: ES"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: município (obrigatório quando consulta=prospeccao). Ex.: VITORIA"
+          },
+          {
+            "name": "bairro",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: bairro (opcional)"
+          },
+          {
+            "name": "cnae",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: CNAE principal com 7 dígitos, subclasse (opcional)"
+          },
+          {
+            "name": "porte",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: porte (opcional)",
+            "enum": [
+              "Microempresa (ME)",
+              "Empresa de Pequeno Porte (EPP)",
+              "Demais"
+            ]
+          },
+          {
+            "name": "simples",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: optante do Simples, S ou N (opcional)",
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          {
+            "name": "mei",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: MEI, S ou N (opcional)",
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          {
+            "name": "situacao",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: ativas (padrão) ou todas",
+            "enum": [
+              "ativas",
+              "todas"
+            ],
+            "default": "ativas"
+          },
+          {
+            "name": "abertura",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: empresas abertas a partir desta data, YYYY-MM-DD (opcional)"
+          },
+          {
+            "name": "so_matriz",
+            "in": "formData",
+            "required": false,
+            "type": "integer",
+            "description": "Prospecção: 1 = somente matriz (opcional)",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          {
+            "name": "ordem",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "Prospecção: recentes (padrão) ou nome",
+            "enum": [
+              "recentes",
+              "nome"
+            ],
+            "default": "recentes"
+          },
+          {
+            "name": "pagina",
+            "in": "formData",
+            "required": false,
+            "type": "integer",
+            "description": "Prospecção: página do resultado, 1 a 40, 50 empresas por página. Paginar a mesma busca não gera nova consulta.",
+            "default": 1
+          },
+          {
+            "name": "token",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Token de autenticação (Obter na área restrita da dbase.com.br)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "400": {
+            "description": "Erro de requisição"
+          },
+          "403": {
+            "description": "Acesso negado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  }
+}
