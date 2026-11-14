@@ -27,9 +27,10 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint src",
-    "format": "prettier --write .",
+    "format": "oxfmt",
     "test": "bun test",
-    "prepublishOnly": "bun run lint && bun run typecheck && bun run build"
+    "prepublishOnly": "bun run lint && bun run typecheck && bun run build",
+    "format:check": "oxfmt --check"
   },
   "keywords": [
     "dbase",
@@ -62,8 +63,8 @@
     "@gusnips/oxlint": "^0.2.0",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.5",
+    "oxfmt": "0.78.0",
     "oxlint": "1.93.0",
-    "prettier": "^3.9.10",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
